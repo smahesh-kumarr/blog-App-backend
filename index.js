@@ -159,7 +159,7 @@ app.post('/blogs/create', upload.single('image'), async (req, res) => {
             return res.status(400).json({ message: 'Image is required' });
         }
 
-        const imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
+        const imageUrl = `https://blog-app-backend-1-rdjj.onrender.com/uploads/${req.file.filename}`;
 
         const newBlog = new Blog({
             name,
