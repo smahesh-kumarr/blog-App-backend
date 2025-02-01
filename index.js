@@ -8,12 +8,16 @@ const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const { promisify } = require('util');
 const unlinkAsync = promisify(fs.unlink);
+require('dotenv').config();
+
+const mongoURI = process.env.MONGO_URI;
+const port = process.env.PORT || 4000;
 
 // Cloudinary configuration
 cloudinary.config({
-    cloud_name: 'dyiuob93s',
-    api_key: '292354667865257',
-    api_secret: 'VEvPK79lAIhrjfYW71BwtClzgXM'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 // Verify Cloudinary configuration
@@ -28,7 +32,6 @@ app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
-const url = 'mongodb+srv://smahesh-kumarr:MaheshKumar@cluster0.tlsbu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/BlogApp';
 
 // Configure multer for file upload
 const storage = multer.diskStorage({
@@ -362,7 +365,7 @@ app.put('/profile/update', upload.single('profileImage'), async (req, res) => {
     }
 });
 
-mongoose.connect(url)
+mongoose.connect(mongoURI)
     .then(() => {
         console.log("Connected To MongoDB");
         app.listen(4000, () => {
