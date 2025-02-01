@@ -218,7 +218,7 @@ app.put('/blogs/:id', upload.single('image'), async (req, res) => {
         };
 
         if (req.file) {
-            updateData.imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
+            updateData.imageUrl = `https://blog-app-backend-1-rdjj.onrender.com/uploads/${req.file.filename}`;
         }
 
         const updatedBlog = await Blog.findByIdAndUpdate(
